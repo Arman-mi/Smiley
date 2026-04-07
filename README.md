@@ -1,6 +1,81 @@
-Smiley is an arcade 2D style video game. it was a project for school. the version the school asked for was very basic, after turning it in I added additional features to make the game more engaging.
-When loading into the game press N to start a new game. afterwards type any random numbers to generate your world and after that press S to launch the game. 
-the game is a survival based game. every round a new entity spawns(enemy types) to hunt you! you can press the spacebar to defend yourself from the enemies and attack them. there are potions in the world
-that restore health. see how high of a round you can achieve. in order to not lose your progress a save game method has been implemented. in order to quit the game just press Q and the game automatically saves 
-your progress so the next time you boot up the game press L to load your game and then continue where you left off.
-the school provided us with a render class and a tile class for us to generate our worlds. everyhting else is my own work. Enjoy :)
+# Smiley — The Survival of Smiley
+
+Smiley is a 2D arcade-style, tile-based survival game built in Java. It started as a school project (world generation + rendering), and was extended afterward with rounds, enemies, combat, health, potions, and save/load.
+
+## Gameplay
+
+- You spawn in a procedurally generated world (seeded RNG).
+- Enemies (“entities”) hunt you by moving toward your position.
+- Survive as many rounds as you can; difficulty increases as more enemies appear.
+- Collect health potions to restore HP.
+
+## Controls
+
+**Main menu**
+- `N` — New game
+- `L` — Load game
+- `Q` — Quit
+
+**New game seed entry**
+- Type digits `0-9` — Build a seed value
+- `S` — Start the game with that seed
+
+**In-game**
+- `W` / `A` / `S` / `D` — Move
+- `Space` — Attack nearby enemies (adjacent tiles)
+- `Q` — Quit + save
+
+## Running the game
+
+### Prereqs
+
+- Java (JDK) installed (Java 11+ recommended)
+- The required `.jar` dependencies live in `Library/` (including `algs4.jar` for `StdDraw`).
+
+### Option A: IntelliJ (simplest)
+
+1. Open this folder as a project.
+2. Add all `.jar` files in `Library/` to the project’s classpath (Project Structure → Libraries).
+3. Run the main class: `src/core/Main.java` (`core.Main`).
+
+### Option B: Command line
+
+**Windows (PowerShell)**
+
+```powershell
+$cp = "Library/*"
+$src = (Get-ChildItem -Recurse -Filter *.java src | ForEach-Object FullName)
+javac -cp $cp -d out $src
+java -cp "out;$cp" core.Main
+```
+
+**macOS/Linux (bash/zsh)**
+
+```bash
+CP="Library/*"
+find src -name "*.java" > sources.txt
+javac -cp "$CP" -d out @sources.txt
+java -cp "out:$CP" core.Main
+```
+
+## Save / load
+
+- The game writes your save to `savegame.txt` in the repo root.
+- To reset progress, delete `savegame.txt`.
+
+## Project layout
+
+- `src/core/` — Game loop, world logic, entities, audio, save/load
+- `src/tileengine/` — Tile + renderer utilities (provided starter code)
+- `src/utils/` — Utility helpers
+- `resources/` — Extra assets (e.g. `background_music.wav`)
+- `SmileyPDFDesignDoc.pdf` / `SmileyDesignDoc.docx` — Design docs
+
+## Notes
+
+- Music playback currently uses a hard-coded local path in `src/core/AudioPlayer.java`. If audio doesn’t play on your machine, update it to a repo-relative path (e.g. `src/music/gg.wav` or `resources/background_music.wav`).
+
+## Credits
+
+- `src/tileengine/` and the `StdDraw`-based rendering approach come from a course-provided starter codebase.
+- The game logic (rounds, enemies, combat, health, potions, save/load) is custom work on top of that foundation.
