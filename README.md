@@ -75,7 +75,4 @@ java -cp "out:$CP" core.Main
 
 - Music playback currently uses a hard-coded local path in `src/core/AudioPlayer.java`. If audio doesn’t play on your machine, update it to a repo-relative path (e.g. `src/music/gg.wav` or `resources/background_music.wav`).
 
-## Credits
 
-- `src/tileengine/` and the `StdDraw`-based rendering approach come from a course-provided starter codebase.
-- The game logic (rounds, enemies, combat, health, potions, save/load) is custom work on top of that foundation.
